@@ -19,6 +19,11 @@
     <div class="form-group">
         <%= f.submit 'Sign Up', class: 'btn btn-block btn-info' %>
     </div>    
+    <div class="form-group">
+      <div class="fb-login-button" data-max-rows="2" data-size="xlarge" data-show-faces="true" data-auto-logout-link="false">
+        <a href="/auth/facebook">Login with Facebook</a>
+      </div>
+    </div>
   <% end %>
 </div>  
 <div class="additional-links">By signing up you agree to <a href="#">Terms of Use</a> and <a href="#">Privacy</a></div>

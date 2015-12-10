@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email])
     if user && user.authenticate(params[:session][:password])
-      session[:user_id] = user.id
+      sign_in(user)
       flash[:success] = "Welcome to Tinder, #{user.name}!"
       redirect_to users_path
     else 
@@ -21,4 +21,14 @@ class SessionsController < ApplicationController
     flash[:success] = "See you again!"
     redirect_to root_path
   end 
+
+  def callback
+    if user = User.from_omniauth(env["omniauth.auth"])
+      sign_in(user)
+      redirect_to users_path
+    else
+      flash[:error] = "Something went wrong :("
+      redirect_to root_path
+    end
+  end
 end
