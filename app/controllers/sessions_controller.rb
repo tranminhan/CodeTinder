@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :skip_if_signed_in, only: [:create, :new]
+
   def new
   end
 

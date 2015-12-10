@@ -16,4 +16,17 @@ class ApplicationController < ActionController::Base
     !current_user.nil?
   end 
 
+  def require_login
+    unless signed_in?
+      flash[:warning] = "You must sign in to see this page!"
+      redirect_to signin_path
+    end 
+  end 
+
+  def skip_if_signed_in
+    if signed_in?
+      redirect_to users_path
+    end 
+  end
+
 end
